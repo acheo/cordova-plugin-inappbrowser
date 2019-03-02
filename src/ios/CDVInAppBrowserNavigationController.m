@@ -39,6 +39,8 @@
     //bgToolbar.barStyle = UIBarStyleDefault;
     //[bgToolbar setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     //[self.view addSubview:bgToolbar];
+    
+    [self setNeedsStatusBarAppearanceUpdate];
 
     [super viewDidLoad];
 }
