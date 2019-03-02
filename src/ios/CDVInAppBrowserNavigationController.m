@@ -81,5 +81,10 @@
     return YES;
 }
 
+- (BOOL)prefersStatusBarHidden
+{
+    return YES;
+}
+
 
 @end
