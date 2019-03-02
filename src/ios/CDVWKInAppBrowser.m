@@ -1049,7 +1049,7 @@ BOOL isExiting = FALSE;
 }
 
 - (BOOL)prefersStatusBarHidden {
-    return NO;
+    return YES;
 }
 
 - (void)close
@@ -1263,6 +1263,7 @@ BOOL isExiting = FALSE;
     
     return YES;
 }
+
 
 
 @end //CDVWKInAppBrowserViewController
