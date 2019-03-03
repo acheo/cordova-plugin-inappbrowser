@@ -312,22 +312,12 @@ static CDVWKInAppBrowser* instance = nil;
     // Run later to avoid the "took a long time" log message.
     dispatch_async(dispatch_get_main_queue(), ^{
         if (weakSelf.inAppBrowserViewController != nil) {
-            float osVersion = [[[UIDevice currentDevice] systemVersion] floatValue];
-            CGRect frame = [[UIScreen mainScreen] bounds];
-            if(initHidden && osVersion < 11){
-                frame.origin.x = -10000;
-            }
-            
-            UIWindow *tmpWindow = [[UIWindow alloc] initWithFrame:frame];
-            UIViewController *tmpController = [[UIViewController alloc] init];
-            
-            [tmpWindow setRootViewController:tmpController];
-            [tmpWindow setWindowLevel:UIWindowLevelNormal];
-            
-            if(!initHidden || osVersion < 11){
-            [tmpWindow makeKeyAndVisible];
-            }
-            [tmpController presentViewController:nav animated:!noAnimate completion:nil];
+
+            UIView* inAppView = weakSelf.inAppBrowserViewController.view;
+            [weakSelf.viewController addChildViewController:weakSelf.inAppBrowserViewController];
+            [weakSelf.viewController.view addSubview:weakSelf.inAppBrowserViewController.view];
+            inAppView.transform = CGAffineTransformMakeTranslation(0, inAppView.frame.size.height);
+
         }
     });
 }
@@ -351,7 +341,7 @@ static CDVWKInAppBrowser* instance = nil;
     dispatch_async(dispatch_get_main_queue(), ^{
         if (self.inAppBrowserViewController != nil) {
             _previousStatusBarStyle = -1;
-            [self.inAppBrowserViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+            //[self.inAppBrowserViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
         }
     });
 }
@@ -1062,11 +1052,11 @@ BOOL isExiting = FALSE;
     // Run later to avoid the "took a long time" log message.
     dispatch_async(dispatch_get_main_queue(), ^{
         isExiting = TRUE;
-        if ([weakSelf respondsToSelector:@selector(presentingViewController)]) {
-            [[weakSelf presentingViewController] dismissViewControllerAnimated:YES completion:nil];
-        } else {
-            [[weakSelf parentViewController] dismissViewControllerAnimated:YES completion:nil];
-        }
+        //if ([weakSelf respondsToSelector:@selector(presentingViewController)]) {
+        //    [[weakSelf presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+        //} else {
+        //    [[weakSelf parentViewController] dismissViewControllerAnimated:YES completion:nil];
+        //}
     });
 }
 
