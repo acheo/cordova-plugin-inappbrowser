@@ -316,7 +316,7 @@ static CDVWKInAppBrowser* instance = nil;
             UIView* inAppView = weakSelf.inAppBrowserViewController.view;
             [weakSelf.viewController addChildViewController:weakSelf.inAppBrowserViewController];
             [weakSelf.viewController.view addSubview:weakSelf.inAppBrowserViewController.view];
-            inAppView.transform = CGAffineTransformMakeTranslation(0, inAppView.frame.size.height);
+
 
         }
     });
